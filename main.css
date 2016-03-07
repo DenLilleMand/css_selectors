@@ -1,0 +1,423 @@
+/* Its hard to understand the effects a 
+ * universal selector has on a page, thats why
+ * the gurus of css relies on inheritance, something
+ * that we can use the univerisal select for is to remove all
+ * space around block elements. with something like so:
+ *  */
+/*
+*the following asteriks style ruins ul bullet points,
+*because of its margin and padding.
+*/
+/*
+* {
+  margin:0;
+  padding:0;
+}
+
+/*universal selector(asterisk)*/
+/*
+* {
+  font-weight:italic;
+  color:black;
+}
+*/
+
+/* asteriks with descendents css*/
+.beautiful * {
+  font-weight: bold;
+}
+
+/*type / element selectors(html tags)*/
+h1 {
+  font-family: Arial, sans-serif;
+  color: #CCCCFF;
+}
+
+
+h2 {
+  font-family:"Century Gothic", "Gill Sans", sans-serif;
+  color:#000000;
+  margin-bottom:0;
+}
+
+
+/*classes*/
+.special {
+  color: #FF0000;
+  font-family:"Monotype Corsiva"
+}
+
+
+/*several classes on one element*/
+.btn {
+  border-radius:5px;
+  font-family: Arial, Helvetica, Serif;
+  font-size: .8em;
+}
+
+.delete {
+  background-color: red;
+}
+
+.add {
+  background-color: green;
+}
+
+.edit {
+  background-color: grey;
+}
+
+.company-name {
+  font-style: italic;
+}
+
+/*id*/
+#banner {
+  color:green;
+}
+
+#copyright {
+  color:orange;
+}
+
+/*group selections*/
+h1, h2, h3, h4, h5, h6 {
+  color:F1CD33;
+}
+
+h1, #copyright, .edit {
+  background-color:green;
+}
+
+/* descendent selectors, the reason why this makes sense is
+ * that we dont have to add a class to anything, or add additional html for it
+ * to work, all we have to do is to add the css*/
+h3 strong {
+  color:red;
+}
+
+/* With decendent selectors we should allways take the shortest route possible to get the job done, so we should never add in the body or html tag, because all relevant tags are descendents of those. 
+* 
+* the descendents doesn't have to be a perfect line either, it could be like this:
+*/
+li a {
+  background-color:yellow;
+
+}
+/*As we can see we dont even need the ul as part of the chain, and the <a> tag doesn't even have to be an immediate child, it could be nested several levels down and still apply.
+ *
+ * we can allso combine descendent selectors with custom classes and ids, such as:
+ * */
+li .nested-div #herpderp {
+  background-color:orange;
+}
+/* Descendent styles is especially useful when modularizeing the code, 
+ * such as a weather widget having a class or id at the beginning of it, and 
+ * all other styles is then descendent of that.*/
+.weather-widget p {
+  color: blue;
+}
+
+.weather-widget h3 {
+  color:tan;
+}
+
+.contact .name {
+  font-weight:bold;
+}
+
+.contact .email {
+  font-style:italic;
+}
+
+.contact .phone {
+  font-weight:bold;
+
+}
+
+/*
+ * This way of styleing a tag is 
+ * specific to a paragraph tag with the 
+ * "specific-class-and-tag" class. It is in general 
+ * frowned upon(due to flexibility issues)
+ */
+p.specific-class-and-tag {
+  color:purple;
+}
+
+/*pseudo-classes and pseudo-elements*/
+/* unvisited */
+a:link {
+
+}
+
+/* visited */
+a:visited {
+
+}
+
+/* hover */
+a:hover {
+
+}
+
+/* the hover effect is not just for links, 
+ * can do it with other elements aswell, such as
+ * div and paragraph etc.*/
+p:hover {
+
+}
+
+/* helps us determine how it looks 
+ * when a user clicks it for that one nano-second,
+ * by makeing it constant.*/
+a:active {
+
+}
+
+/* styling paragraph parts */
+p:first-letter {
+
+}
+
+div:first-line {
+
+}
+
+input {
+  width:100px;
+  height:auto;
+
+}
+
+input:FOCUS {
+  background:red;
+}
+
+/* seems like it works perfect on input and textarea,
+ * on divs, not so much :)  anyway, i think
+ * i would allways use it on a input field anyway.
+div:FOCUS {
+  background:red;
+}
+*/
+
+
+/* the technical term for the output we create this way 
+ * is: 'generated content' and the thing is,
+ * browsers generate content all the time,
+ * its what happens with bulleted lists etc. Which means
+ * that if we set a :before on a <li> we can change 
+ * the way it display lists, well i tried,
+ * but it doesn't remove the bullet, so i guess you 
+ * would have to set the list-style to none, 
+ * and then add a li:before thing that makes sense*/
+.tip:before {
+  content: "Hot tip!"
+}
+
+.quoatation:before {
+  content: "\""
+}
+
+.quoatation:after {
+  content: "\""
+}
+
+/* 
+ * These pseudo elements that start with colon, has been changed to contain 
+ * two colons instead of a single colon. The problem is that this syntax doesn't work in 
+ * internet explorer 8 and below, other browsers still support the single colon syntax though,
+ * which is why its the preferred way to do it. With the selection element,  it is not 
+ * working with just a single colon though - its only with the others.  The only properties
+ * that are available is color and background-color, so we can't go crazy with properties.
+ * btw, about the compatibility - this won't work in internet explorer 8, firefox or IOS safari, 
+ * but it does work in all other current browsers. To see how to make it work in firefox, 
+ * there is another example below this one.
+ * */
+li::selection {
+  background-color:purple;
+}
+
+/* firefox vendor prefix. to make a vendor 
+ * prefix work, we need to have both of the styles in the same stylesheet, 
+ * like we have now with the li::selection above this one and the vendor prefix below, 
+ * i dont think order matters. website that shows 
+ * exactly what elements a selector affects: http://gallery.theopalgroup.com/selectoracle */
+::-moz-selection {
+  color: #FFFFFF;
+  background-color:#993366;
+}
+
+
+/* 
+ * Another way to affect a element is to style it based on its attributes, e.g.
+ * */
+img[title] {
+  color:red;
+}
+/* that style targets any img element with the title attribute, it allso works for classes: */
+.herpderp[title] {
+  background-color:blue;
+}
+
+/* or even a specific value as attribute */
+.herpderp[href="http://www.cafesoylentgreen.com"] {
+  color: green;
+  font-weight: bold;
+}
+
+/* To select just textboxes in a form, forexample use this selector: */
+input[type="text"]
+/* to select checkboxes it would be input[type="checkbox"] etc. */
+
+/* These things can be used in a more handy way aswell, e.g. if we have a bunch 
+ * of links of the webpage and we want to style them differently depending on if 
+ * they link out of the website or internally, we could use a regex:*/
+a[href^="http://"], a[href^="https://"] {
+	color: yellow;
+	background-color: purple;
+}
+
+/* endwith: */
+a[href$=".pdf"] {
+  background: url(doc_icon.png) no-repeat;
+  padding-left: 15px;
+}
+
+/* If we have a bunch of employee pictures on a website, we can call them all a class,
+ * and style that class. But a faster way is to consistently name these <img> elements,
+ * e.g. give all of the pictures a source with the word headshot in it, e.g. karen_headshot.png and then do the following:
+ * */
+img[src*="headshot"] {
+  width:100px;
+  height:auto;
+}
+
+/* I think this one is hard, because it doesn't actually apply to the first child inside of 
+ * a <p> tag, but it refers to any <p> element that is the first child*/
+p:first-child {
+  background-color:purple;
+}
+
+/* Same as the other one, just with the last element instead of the first */
+li:last-child {
+  background-color:yellow;
+}
+
+/* This one is kind of weird, it ONLY applies if <p> is the only child inside of its parent,
+ * that allso means that <p> cannot have any additional children it self, so <div><p><div></div></p></div> would not apply because even though <p> is the only child of the parent, it has its own children which ruins it.*/
+p:only-child {
+  background-color:tan;
+}
+
+/*tr:nth-child(odd) { background-color: #D9F0FF } */
+/*tr:nth-child(even) { background-color: #FFFFFF } */
+/* a single number selects a specific item in the table */
+/*tr:nth-child(4) { background-color: #D2FF91} */
+/* a number and 'n' means every 3rd element  */
+/*tr:nth-child(3n) { background-color: #2DF051 } */
+
+/* A style that starts from the second element and takes every third */
+/*td:nth-child(3n+2) { background-color:#900; } */
+
+/* Pretty cool way to do every other column(notice 
+ * that we style this on the table definition): */
+td:nth-child(odd) { background-color: #D9F0FF } 
+/* If we wanted to do the rows we would have to style the tr(tablerow) instead */
+tr:nth-child(even) { background-color: #D9F000 };
+
+li:nth-child(-n+3) {
+  background-color:#2FF;
+}
+
+/* If we have a sidebar that appears on several pages and has a paragraph inside 
+ * of it, But the sidebar sometimes starts with a <h1> tag, but we still want to style 
+ * the paragraph all the same we can use :FIRST-OF-TYPE which takes the first element
+ * of a specific tag e.g.
+ */
+.sidebar p:first-of-type {
+  background-color:tan;
+}
+
+.other-sidebar p:last-of-type {
+  background-color:tan;
+}
+
+/* We have a paragraph in our html, which has a large text and a bunch of pictures distributed inside of it, it looks horrible with pictures in the middle of the text though so we want to float every other image to either side, we can't just select children 
+ * though because we have alot of tags inside of the text, so we're going to use the 
+ * nth-of-type selector*/
+.history img:nth-of-type(odd) {
+  float:left;
+}
+
+.history img:nth-of-type(even) {
+  float:right;
+}
+
+.clear {
+  clear:both;
+}
+
+/* Greater than sign means the immediate children,
+ * so if we nest a bunch of divs inside of eachother,
+ * we will only refer to the first div. In this case we 
+ * should the superiority of the child selectors in cases
+ * where we nest a bunch of elements inside of others, while we 
+ * can allmost allways get to a element in five different ways, in this
+ * specific use-case children selectors are preferred.*/
+ul.main-list > li {
+  font-family: Sans-serif;
+}
+
+ul.main-list > li > ul > li {
+  font-family: "Times New Roman", Times, serif;
+}
+
+
+/* Sibling selectors, on tags that are adjacent(the tag immediately below it) */
+h2 + p {
+  background-color:orange;
+}
+
+/* The following is a general sibling combinatory selector,
+ * and its going to select all of the siblings of h2, of 
+ * the type span, which means that if you do a h2 and spans on the same level of the html hierarchy(tree) this style will 
+ * target all of those.*/
+h2 ~ span {
+  background-color:green;
+}
+
+#some-form {
+  display: none;
+}
+
+#some-form:target {
+  display: block;
+}
+
+/* The not operator, in this case it styles all of the paragraphs
+ * inside of the element with the class not-style, but then it allso 
+ * looks for any paragraph with the special class, and doesn't style that one*/
+.not-style p:not(.special)  {
+  color:blue;
+}
+
+/* One specific use for the not-operator is if we want to style all
+ * links that points outside of our page, 
+ * */
+a[href^="http://"]:not([href^="http://localhost"]) {
+  background-color:red;
+}
+/* better way to write a thing that deals with more cases: */)
+a[href^="http://"]:not([href*="localhost"]) {
+  background-color:purple;
+}
+
+/* the not selector can be used with many different selections,
+ * a few are:*/
+.footnote:not(div) {}
+img:not(.portrait) {}
+div:not(#banner) {}
+li:not(:first-child) {}
+
